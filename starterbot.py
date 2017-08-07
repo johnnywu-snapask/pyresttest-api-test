@@ -10,6 +10,7 @@ BOT_ID = os.environ.get("BOT_ID")
 AT_BOT = "<@" + BOT_ID + ">"
 EXAMPLE_COMMAND = "do"
 UAT_API_TEST = "uat_api_test"
+LOG = "dump_log"
 
 # instantiate Slack & Twilio clients
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
@@ -25,7 +26,8 @@ def handle_command(command, channel):
     response = "Not sure what you mean. Use the *" + EXAMPLE_COMMAND + \
                "* command to see what can I do for you."
     if command.startswith(EXAMPLE_COMMAND):
-        response = "`" + UAT_API_TEST + "` Proceed UAT API regression test"
+        response = "`%s` Proceed UAT API regression test\n`%s` Dump debug log for last run" %(UAT_API_TEST,LOG)
+        
     if command.startswith(UAT_API_TEST):
         slack_client.api_call("chat.postMessage", channel=channel, text="Running " + command + "...", as_user=True)
         bashCommand = "./uatapitest.sh || true"
@@ -40,9 +42,15 @@ def handle_command(command, channel):
                 line = line.replace("[92m", ":white_check_mark:")
                 line = line.replace("[0m", "")
                 newf.write(line)
-        
+                        
         newf = open('Slack.msg', 'r')            
         response = newf.read()
+        
+    if command.startswith(LOG):
+        f = open('log.txt', 'r')
+        log = f.read()
+        f.close()
+        response = "```" + log + "```"
         
     slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 

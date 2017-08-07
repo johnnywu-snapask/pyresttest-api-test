@@ -27,6 +27,7 @@ def handle_command(command, channel):
     if command.startswith(EXAMPLE_COMMAND):
         response = "`" + UAT_API_TEST + "` Proceed UAT API regression test"
     if command.startswith(UAT_API_TEST):
+        slack_client.api_call("chat.postMessage", channel=channel, text="Running " + command + "...", as_user=True)
         bashCommand = "./uatapitest.sh || true"
         subprocess.check_output(['bash','-c', bashCommand])       
         f = open('log.txt', 'r')

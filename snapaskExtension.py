@@ -1,8 +1,10 @@
-def decrease(compare_num, target_num):
-    return target_num == (compare_num - 1)
+def decrease(target_num, compare_num):
+    return int(target_num) == (int(compare_num) - 1)
     
-def increase(compare_num, target_num):
-    return target_num == (compare_num + 1)
+def increase(target_num, compare_num):
+    return int(target_num) == (int(compare_num) + 1)
+    
+def float_greater_than(target_num, compare_num):
+    return float(target_num) >= float(compare_num)
  
-COMPARATORS = {'dec': decrease}
-COMPARATORS = {'inc': increase}
+COMPARATORS = {'dec': decrease, 'inc': increase, 'fgt': float_greater_than}

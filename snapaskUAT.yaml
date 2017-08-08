@@ -776,7 +776,7 @@
 ############## UAT Android QA testsuite START ##############
 ############################################################
 - test:
-    - group: "UAT Android login testsuite"
+    - group: "UAT Android QA testsuite"
     - name: "check student quota before 1st question"
     - url: {template: "/api/v2/students/$SnapaskUID/quotas"}
     - method: "GET"
@@ -940,7 +940,7 @@
         - compare: {jsonpath_mini: "data.currency", comparator: "str_eq", expected: {template: $tutCurrency}}
 
 - test:
-    - group: "UAT Android login testsuite"
+    - group: "UAT Android QA testsuite"
     - name: "check student quota after finishing 1st question"
     - url: {template: "/api/v2/students/$SnapaskUID/quotas"}
     - method: "GET"
@@ -952,7 +952,7 @@
         - compare: {jsonpath_mini: "data.without_subscription_quota", comparator: "dec", expected: {template: $WithoutSubscriptionQuota}}
 
 - test:
-    - group: "UAT Android login testsuite"
+    - group: "UAT Android QA testsuite"
     - name: "check student quota before 2nd question"
     - url: {template: "/api/v2/students/$SnapaskUID/quotas"}
     - method: "GET"
@@ -1116,7 +1116,7 @@
         - compare: {jsonpath_mini: "data.currency", comparator: "str_eq", expected: {template: $tutCurrency}}
 
 - test:
-    - group: "UAT Android login testsuite"
+    - group: "UAT Android QA testsuite"
     - name: "check student quota after finishing 2nd question"
     - url: {template: "/api/v2/students/$SnapaskUID/quotas"}
     - method: "GET"

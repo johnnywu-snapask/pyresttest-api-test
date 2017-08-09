@@ -854,7 +854,7 @@
     - url: {template: "/api/v2/tutors/$tut_SnapaskUID/questions/$QuestionID/pick"}
     - method: "PATCH"
     - headers: {template: {'Content-Type': 'application/json','Snapask-Authorization': 'Bearer $tut_AuthToken','Snapask-User-Agent': '{"device_id":"$DeviceID","os":"android","platform":"app"}','User-Agent': 'okhttp/3.6.0'}}
-    - body: {template: '{"lang": "en-US","question_id": "$QuestionID_1"}'}
+    - body: {template: '{"lang": "en-US","question_id": "$QuestionID"}'}
     - validators:
         - compare: {jsonpath_mini: "status", comparator: "str_eq", expected: 'success'}
         - compare: {jsonpath_mini: "data.message.id", comparator: "ge", expected: 0}
@@ -936,7 +936,7 @@
         - compare: {jsonpath_mini: "status", comparator: "str_eq", expected: 'success'}
         - compare: {jsonpath_mini: "data.total_answered_questions_count", comparator: "inc", expected: {template: $AnswerQuestion}}
         - compare: {jsonpath_mini: "data.uncashed_count", comparator: "inc", expected: {template: $UncashCount}}
-        - compare: {jsonpath_mini: "data.uncashed_money", comparator: "fgt", expected: {template: $UncashMoney}}
+        - compare: {jsonpath_mini: "data.uncashed_money", comparator: "flo-gt", expected: {template: $UncashMoney}}
         - compare: {jsonpath_mini: "data.currency", comparator: "str_eq", expected: {template: $tutCurrency}}
 
 - test:
@@ -1030,7 +1030,7 @@
     - url: {template: "/api/v2/tutors/$tut_SnapaskUID/questions/$QuestionID/pick"}
     - method: "PATCH"
     - headers: {template: {'Content-Type': 'application/json','Snapask-Authorization': 'Bearer $tut_AuthToken','Snapask-User-Agent': '{"device_id":"$DeviceID","os":"android","platform":"app"}','User-Agent': 'okhttp/3.6.0'}}
-    - body: {template: '{"lang": "en-US","question_id": "$QuestionID_1"}'}
+    - body: {template: '{"lang": "en-US","question_id": "$QuestionID"}'}
     - validators:
         - compare: {jsonpath_mini: "status", comparator: "str_eq", expected: 'success'}
         - compare: {jsonpath_mini: "data.message.id", comparator: "ge", expected: 0}
@@ -1112,7 +1112,7 @@
         - compare: {jsonpath_mini: "status", comparator: "str_eq", expected: 'success'}
         - compare: {jsonpath_mini: "data.total_answered_questions_count", comparator: "inc", expected: {template: $AnswerQuestion}}
         - compare: {jsonpath_mini: "data.uncashed_count", comparator: "inc", expected: {template: $UncashCount}}
-        - compare: {jsonpath_mini: "data.uncashed_money", comparator: "fgt", expected: {template: $UncashMoney}}
+        - compare: {jsonpath_mini: "data.uncashed_money", comparator: "flo-gt", expected: {template: $UncashMoney}}
         - compare: {jsonpath_mini: "data.currency", comparator: "str_eq", expected: {template: $tutCurrency}}
 
 - test:
